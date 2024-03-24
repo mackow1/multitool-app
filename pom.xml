@@ -8,11 +8,20 @@
 		<version>3.2.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>pl.kowalczyk.maciej.spring.multitoolapp</groupId>
 	<artifactId>multitool-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
 	<name>multitool-app</name>
 	<description>Multi purpose application</description>
+
+	<modules>
+		<module>currency-converter-app</module>
+		<module>multitool-api</module>
+	</modules>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>

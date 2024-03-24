@@ -11,3 +11,6 @@ public class MultitoolAppApplication {
 	}
 
 }
+
+
+// TODO: 22.03.2024 jak przesłać request parameters GET - zaimplementować 
