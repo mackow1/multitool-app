@@ -15,9 +15,9 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RapidApiCurrencyExchange {
+public class RapidApiCurrencyExchangeService {
 
-    private static final Logger LOGGER = Logger.getLogger(RapidApiCurrencyExchange.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(RapidApiCurrencyExchangeService.class.getName());
 
     public Optional<RapidApiCurrencyExchangeResponse> currencyExchange(
             RapidApiCurrencyExchangeRequest currencyExchangeRequest) throws RapidApiCurrencyExchangeException {

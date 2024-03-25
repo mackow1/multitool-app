@@ -9,14 +9,12 @@ import pl.kowalczyk.maciej.spring.multitoolapp.model.RapidApiCurrencyExchangeRes
 import java.io.IOException;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class RapidApiCurrencyExchangeTest {
+class RapidApiCurrencyExchangeServiceTest {
 
     @Test
     void currencyExchangeWithRequestNull() throws IOException, RapidApiCurrencyExchangeException {
         // given
-        RapidApiCurrencyExchange rapidApiCurrencyExchange = new RapidApiCurrencyExchange();
+        RapidApiCurrencyExchangeService rapidApiCurrencyExchange = new RapidApiCurrencyExchangeService();
 
         // when
         Optional<RapidApiCurrencyExchangeResponse> currencyExchangeResponseOptional =
@@ -33,7 +31,7 @@ class RapidApiCurrencyExchangeTest {
     @Test
     void currencyExchangeWithRequest() throws IOException, RapidApiCurrencyExchangeException {
         // given
-        RapidApiCurrencyExchange rapidApiCurrencyExchange = new RapidApiCurrencyExchange();
+        RapidApiCurrencyExchangeService rapidApiCurrencyExchange = new RapidApiCurrencyExchangeService();
         RapidApiCurrencyExchangeRequest currencyExchangeRequest = new RapidApiCurrencyExchangeRequest("PLN", "USD");
 
         // when
