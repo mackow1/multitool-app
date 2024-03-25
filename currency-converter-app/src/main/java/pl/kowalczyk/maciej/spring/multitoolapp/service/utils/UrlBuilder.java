@@ -9,7 +9,7 @@ public class UrlBuilder {
     private static final Logger LOGGER = Logger.getLogger(UrlBuilder.class.getName());
 
     public static HttpUrl build(String currencyFrom, String currencyTo, String amount) {
-        LOGGER.info("build(" + currencyFrom + ", " + currencyTo + ")");
+        LOGGER.info("build(" + currencyFrom + ", " + currencyTo + ", " + amount + ")");
 
         HttpUrl httpUrl = new HttpUrl.Builder()
                 .scheme("https")
