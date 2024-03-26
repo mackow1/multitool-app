@@ -16,3 +16,4 @@ public class MultitoolAppApplication {
 // TODO: 22.03.2024 jak przesłać request parameters GET - zaimplementować
 
 // TODO: 25.03.2024 Dla RapidApiCurrencyExchange wartości w stringach przenieść do application.properties i użyć mechanizmu spring, wydzielić mniejsze metody w ramach refaktoryzcji (service)
+// https://www.baeldung.com/properties-with-spring
