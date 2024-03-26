@@ -4,6 +4,7 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.kowalczyk.maciej.spring.multitoolapp.api.exception.RapidApiCurrencyExchangeException;
 import pl.kowalczyk.maciej.spring.multitoolapp.model.RapidApiCurrencyExchangeRequest;
@@ -25,6 +26,12 @@ public class RapidApiCurrencyExchangeService {
 
     private static final Logger LOGGER = Logger.getLogger(RapidApiCurrencyExchangeService.class.getName());
 
+    @Value("${rapidapi-key}")
+    private String apiKey;
+
+    @Value("${rapidapi-host}")
+    private String apiHost;
+
     public List<String> list() throws RapidApiCurrencyExchangeException {
         LOGGER.info("list()");
 
@@ -33,8 +40,8 @@ public class RapidApiCurrencyExchangeService {
         Request request = new Request.Builder()
                 .url("https://currency-exchange.p.rapidapi.com/listquotes")
                 .get()
-                .addHeader("X-RapidAPI-Key", "e0d6da3682msh10c9940bca9e892p1a25e2jsn005826af4a87")
-                .addHeader("X-RapidAPI-Host", "currency-exchange.p.rapidapi.com")
+                .addHeader("X-RapidAPI-Key", apiKey)
+                .addHeader("X-RapidAPI-Host", apiHost)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
@@ -75,8 +82,8 @@ public class RapidApiCurrencyExchangeService {
             Request request = new Request.Builder()
                     .url(url)
                     .get()
-                    .addHeader("X-RapidAPI-Key", "e0d6da3682msh10c9940bca9e892p1a25e2jsn005826af4a87")
-                    .addHeader("X-RapidAPI-Host", "currency-exchange.p.rapidapi.com")
+                    .addHeader("X-RapidAPI-Key", apiKey)
+                    .addHeader("X-RapidAPI-Host", apiHost)
                     .build();
 
             try (Response response = client.newCall(request).execute()) {
