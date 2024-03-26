@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Currency exchange</title>
+</head>
+<body>
+<h1>Currency exchange</h1>
+
+<form action="/currencies/exchange" method="post">
+    <div>
+        Currency From: <input name="currencyFrom">
+    </div>
+    <div>
+        Currency To: <input name="currencyTo">
+    </div>
+    <div>
+        Amount: <input name="amount">
+    </div>
+    <button type="submit">Exchange</button>
+
+</form>
+
+<div>
+    Exchanged currency: <span th:text="${exchangedCurrency}"></span>
+</div>
+</body>
+</html>
