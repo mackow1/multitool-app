@@ -7,6 +7,7 @@ import pl.kowalczyk.maciej.spring.multitoolapp.model.RapidApiCurrencyExchangeReq
 import pl.kowalczyk.maciej.spring.multitoolapp.model.RapidApiCurrencyExchangeResponse;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 class RapidApiCurrencyExchangeServiceTest {
@@ -44,5 +45,17 @@ class RapidApiCurrencyExchangeServiceTest {
 
         // then
         Assertions.assertNotNull(currencyExchangeResponse, "Response is NULL");
+    }
+
+    @Test
+    void list() throws RapidApiCurrencyExchangeException {
+        // given
+        RapidApiCurrencyExchangeService rapidApiCurrencyExchange = new RapidApiCurrencyExchangeService();
+
+        // when
+        List<String> currencies = rapidApiCurrencyExchange.list();
+
+        // then
+
     }
 }

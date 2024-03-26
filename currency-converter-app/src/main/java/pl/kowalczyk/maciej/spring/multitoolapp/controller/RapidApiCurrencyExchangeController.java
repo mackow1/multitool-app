@@ -11,6 +11,7 @@ import pl.kowalczyk.maciej.spring.multitoolapp.model.RapidApiCurrencyExchangeReq
 import pl.kowalczyk.maciej.spring.multitoolapp.model.RapidApiCurrencyExchangeResponse;
 import pl.kowalczyk.maciej.spring.multitoolapp.service.RapidApiCurrencyExchangeService;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -28,10 +29,13 @@ public class RapidApiCurrencyExchangeController {
     }
 
     @GetMapping
-    public String list() {
+    public String list(ModelMap modelMap) throws RapidApiCurrencyExchangeException {
         LOGGER.info("list()");
 
-        String result = null;
+        List<String> currencies = rapidApiCurrencyExchangeService.list();
+        modelMap.addAttribute("currencies", currencies);
+
+        String result = "currencies.html";
 
         LOGGER.info("list(...) = " + result);
         return result;
