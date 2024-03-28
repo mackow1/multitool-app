@@ -1,5 +1,7 @@
 package pl.kowalczyk.maciej.spring.multitoolapp.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -50,16 +52,15 @@ public class RapidApiCurrencyExchangeService {
             if (response != null) {
                 if (response.body() != null) {
 
-                    String currenciesString = response.body().string();
-                    String currenciesStringTrimed = currenciesString.substring(1, currenciesString.length() - 1);
-                    String[] currenciesArray = currenciesStringTrimed.split(",");
+                    String currenciesListResponseBodyString = response.body().string();
 
-                    List<String> currencies = Arrays.stream(currenciesArray).toList().stream()
-                            .map(word -> word.substring(1, word.length() - 1))
-                            .collect(Collectors.toList());
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    List<String> currenciesListFromJson = objectMapper.readValue(
+                            currenciesListResponseBodyString, (new TypeReference<List<String>>() {
+                            }));
 
-                    LOGGER.info("list(...) = " + currencies);
-                    return currencies;
+                    LOGGER.info("list(...) = " + currenciesListFromJson);
+                    return currenciesListFromJson;
                 }
             }
         } catch (IOException e) {
@@ -117,7 +118,7 @@ public class RapidApiCurrencyExchangeService {
         LOGGER.info("buildRequest(" + url + ")");
 
         Request request = new Request.Builder()
-                .url("https://currency-exchange.p.rapidapi.com/listquotes")
+                .url(url)
                 .get()
                 .addHeader("X-RapidAPI-Key", apiKey)
                 .addHeader("X-RapidAPI-Host", apiHost)

@@ -20,6 +20,7 @@ class RapidApiCurrencyExchangeServiceTest {
     private RapidApiCurrencyExchangeService rapidApiCurrencyExchangeService;
 
     private static final String URL = "https://currency-exchange.p.rapidapi.com/listquotes";
+    private static final String URL_EXCEPTION = "https://currency-exchange.p.rapidapi.com/listquotesbad";
 
     @Test
     void currencyExchangeWithRequestNull() throws IOException, RapidApiCurrencyExchangeException {
@@ -29,12 +30,13 @@ class RapidApiCurrencyExchangeServiceTest {
         Optional<RapidApiCurrencyExchangeResponse> currencyExchangeResponseOptional =
                 rapidApiCurrencyExchangeService.currencyExchange(null);
 
-        RapidApiCurrencyExchangeResponse currencyExchangeResponse = currencyExchangeResponseOptional.orElseThrow(
-                () -> new RapidApiCurrencyExchangeException("Unable to exchange currency")
-        );
-
         // then
-        Assertions.assertNotNull(currencyExchangeResponse, "Response is NULL");
+//        Assertions.assertThrows(RapidApiCurrencyExchangeException.class, () -> {
+//                    rapidApiCurrencyExchangeService.currencyExchange(null);
+//                },
+//                "Expected RapidApiCurrencyExchangeException, but it was not thrown"
+//        );
+        Assertions.assertEquals(Optional.empty(), currencyExchangeResponseOptional, "Expected Optional.empty()");
     }
 
     @Test
@@ -62,7 +64,7 @@ class RapidApiCurrencyExchangeServiceTest {
         List<String> currencies = rapidApiCurrencyExchangeService.list();
 
         // then
-
+        Assertions.assertNotNull(currencies, "List is NULL");
     }
 
     @Test

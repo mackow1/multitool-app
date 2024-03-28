@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MultitoolAppApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MultitoolAppApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MultitoolAppApplication.class, args);
+    }
 
 }
 
@@ -17,3 +17,5 @@ public class MultitoolAppApplication {
 
 // TODO: 25.03.2024 Dla RapidApiCurrencyExchange wartości w stringach przenieść do application.properties i użyć mechanizmu spring, wydzielić mniejsze metody w ramach refaktoryzcji (service)
 // https://www.baeldung.com/properties-with-spring
+
+// TODO: 28.03.2024 Dodać użytkownika i zapisywanie requestów do bazy danych

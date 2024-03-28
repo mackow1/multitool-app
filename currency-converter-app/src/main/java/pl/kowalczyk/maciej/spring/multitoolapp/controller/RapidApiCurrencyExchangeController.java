@@ -42,9 +42,11 @@ public class RapidApiCurrencyExchangeController {
     }
 
     @GetMapping(value = "/exchange")
-    public String exchangeView() {
+    public String exchangeView(ModelMap modelMap) throws RapidApiCurrencyExchangeException {
         LOGGER.info("exchangeView()");
 
+        List<String> currencies = rapidApiCurrencyExchangeService.list();
+        modelMap.addAttribute("currencies", currencies);
         String result = "currency-exchange";
 
         LOGGER.info("exchangeView(...) = " + result);
