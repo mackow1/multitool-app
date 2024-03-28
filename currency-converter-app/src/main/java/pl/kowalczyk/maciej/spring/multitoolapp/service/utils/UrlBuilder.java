@@ -8,7 +8,7 @@ public class UrlBuilder {
 
     private static final Logger LOGGER = Logger.getLogger(UrlBuilder.class.getName());
 
-    public static HttpUrl build(String currencyFrom, String currencyTo, String amount) {
+    public static String build(String currencyFrom, String currencyTo, String amount) {
         LOGGER.info("build(" + currencyFrom + ", " + currencyTo + ", " + amount + ")");
 
         HttpUrl httpUrl = new HttpUrl.Builder()
@@ -20,7 +20,9 @@ public class UrlBuilder {
                 .addQueryParameter("q", amount)
                 .build();
 
-        LOGGER.info("build(...) = " + httpUrl);
-        return httpUrl;
+        String url = httpUrl.toString();
+
+        LOGGER.info("build(...) = " + url);
+        return url;
     }
 }

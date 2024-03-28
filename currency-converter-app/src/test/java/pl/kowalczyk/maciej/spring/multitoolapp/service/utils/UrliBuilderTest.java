@@ -13,13 +13,12 @@ class UrliBuilderTest {
         // given
 
         // when
-        HttpUrl url = UrlBuilder.build("PLN", "USD", "1.0");
-        String urlToString = url.toString();
+        String url = UrlBuilder.build("PLN", "USD", "1.0");
 
         // then
         Assertions.assertAll(
                 () -> Assertions.assertNotNull(url, "Url is NULL"),
-                () -> Assertions.assertEquals(URL, urlToString, "Urls are not the same")
+                () -> Assertions.assertEquals(URL, url, "Urls are not the same")
         );
     }
 }
