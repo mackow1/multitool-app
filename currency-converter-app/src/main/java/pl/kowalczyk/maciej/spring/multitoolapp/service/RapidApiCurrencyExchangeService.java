@@ -37,12 +37,14 @@ public class RapidApiCurrencyExchangeService {
 
         OkHttpClient client = new OkHttpClient();
 
-        Request request = new Request.Builder()
-                .url("https://currency-exchange.p.rapidapi.com/listquotes")
-                .get()
-                .addHeader("X-RapidAPI-Key", apiKey)
-                .addHeader("X-RapidAPI-Host", apiHost)
-                .build();
+//        Request request = new Request.Builder()
+//                .url("https://currency-exchange.p.rapidapi.com/listquotes")
+//                .get()
+//                .addHeader("X-RapidAPI-Key", apiKey)
+//                .addHeader("X-RapidAPI-Host", apiHost)
+//                .build();
+
+        Request request = buildRequest("https://currency-exchange.p.rapidapi.com/listquotes");
 
         try (Response response = client.newCall(request).execute()) {
             if (response != null) {
@@ -76,15 +78,17 @@ public class RapidApiCurrencyExchangeService {
 
         if (currencyExchangeRequest != null) {
             OkHttpClient client = new OkHttpClient();
-            HttpUrl url = UrlBuilder.build(currencyExchangeRequest.getCurrencyFrom(), currencyExchangeRequest.getCurrencyTo(), "1.0");
+            String url = UrlBuilder.build(currencyExchangeRequest.getCurrencyFrom(), currencyExchangeRequest.getCurrencyTo(), "1.0");
 
             // TODO: oddzielna metoda
-            Request request = new Request.Builder()
-                    .url(url)
-                    .get()
-                    .addHeader("X-RapidAPI-Key", apiKey)
-                    .addHeader("X-RapidAPI-Host", apiHost)
-                    .build();
+//            Request request = new Request.Builder()
+//                    .url(url)
+//                    .get()
+//                    .addHeader("X-RapidAPI-Key", apiKey)
+//                    .addHeader("X-RapidAPI-Host", apiHost)
+//                    .build();
+
+            Request request = buildRequest(url);
 
             try (Response response = client.newCall(request).execute()) {
                 if (response != null) {
@@ -107,5 +111,19 @@ public class RapidApiCurrencyExchangeService {
 
         LOGGER.info("currencyExchange(...) = " + Optional.empty());
         return Optional.empty();
+    }
+
+    Request buildRequest(String url) {
+        LOGGER.info("buildRequest(" + url + ")");
+
+        Request request = new Request.Builder()
+                .url("https://currency-exchange.p.rapidapi.com/listquotes")
+                .get()
+                .addHeader("X-RapidAPI-Key", apiKey)
+                .addHeader("X-RapidAPI-Host", apiHost)
+                .build();
+
+        LOGGER.info("buildRequest(...) = " + request);
+        return request;
     }
 }

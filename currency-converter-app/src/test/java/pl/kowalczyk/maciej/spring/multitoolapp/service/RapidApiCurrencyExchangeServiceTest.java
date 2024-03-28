@@ -1,7 +1,10 @@
 package pl.kowalczyk.maciej.spring.multitoolapp.service;
 
+import okhttp3.Request;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import pl.kowalczyk.maciej.spring.multitoolapp.api.exception.RapidApiCurrencyExchangeException;
 import pl.kowalczyk.maciej.spring.multitoolapp.model.RapidApiCurrencyExchangeRequest;
 import pl.kowalczyk.maciej.spring.multitoolapp.model.RapidApiCurrencyExchangeResponse;
@@ -10,16 +13,21 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+@SpringBootTest
 class RapidApiCurrencyExchangeServiceTest {
+
+    @Autowired
+    private RapidApiCurrencyExchangeService rapidApiCurrencyExchangeService;
+
+    private static final String URL = "https://currency-exchange.p.rapidapi.com/listquotes";
 
     @Test
     void currencyExchangeWithRequestNull() throws IOException, RapidApiCurrencyExchangeException {
         // given
-        RapidApiCurrencyExchangeService rapidApiCurrencyExchange = new RapidApiCurrencyExchangeService();
 
         // when
         Optional<RapidApiCurrencyExchangeResponse> currencyExchangeResponseOptional =
-                rapidApiCurrencyExchange.currencyExchange(null);
+                rapidApiCurrencyExchangeService.currencyExchange(null);
 
         RapidApiCurrencyExchangeResponse currencyExchangeResponse = currencyExchangeResponseOptional.orElseThrow(
                 () -> new RapidApiCurrencyExchangeException("Unable to exchange currency")
@@ -32,12 +40,11 @@ class RapidApiCurrencyExchangeServiceTest {
     @Test
     void currencyExchangeWithRequest() throws IOException, RapidApiCurrencyExchangeException {
         // given
-        RapidApiCurrencyExchangeService rapidApiCurrencyExchange = new RapidApiCurrencyExchangeService();
         RapidApiCurrencyExchangeRequest currencyExchangeRequest = new RapidApiCurrencyExchangeRequest("PLN", "USD");
 
         // when
         Optional<RapidApiCurrencyExchangeResponse> currencyExchangeResponseOptional =
-                rapidApiCurrencyExchange.currencyExchange(currencyExchangeRequest);
+                rapidApiCurrencyExchangeService.currencyExchange(currencyExchangeRequest);
 
         RapidApiCurrencyExchangeResponse currencyExchangeResponse = currencyExchangeResponseOptional.orElseThrow(
                 () -> new RapidApiCurrencyExchangeException("Unable to exchange currency")
@@ -50,12 +57,22 @@ class RapidApiCurrencyExchangeServiceTest {
     @Test
     void list() throws RapidApiCurrencyExchangeException {
         // given
-        RapidApiCurrencyExchangeService rapidApiCurrencyExchange = new RapidApiCurrencyExchangeService();
 
         // when
-        List<String> currencies = rapidApiCurrencyExchange.list();
+        List<String> currencies = rapidApiCurrencyExchangeService.list();
 
         // then
 
+    }
+
+    @Test
+    void buildRequest() {
+        // given
+
+        // when
+        Request request = rapidApiCurrencyExchangeService.buildRequest(URL);
+
+        // then
+        Assertions.assertNotNull(request, "Request is NULL");
     }
 }
