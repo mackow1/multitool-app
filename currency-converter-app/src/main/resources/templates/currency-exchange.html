@@ -9,10 +9,20 @@
 
 <form action="/currencies/exchange" method="post">
     <div>
-        Currency From: <input name="currencyFrom">
+        Currency From:
+        <select name="currencyFrom">
+            <option th:each="currency : ${currencies}"
+                    th:value="${currency}"
+                    th:text="${currency}">Unknown</option>
+        </select>
     </div>
     <div>
-        Currency To: <input name="currencyTo">
+        Currency To:
+        <select name="currencyTo">
+            <option th:each="currency : ${currencies}"
+                    th:value="${currency}"
+                    th:text="${currency}">Unknown</option>
+        </select>
     </div>
     <div>
         Amount: <input name="amount">
